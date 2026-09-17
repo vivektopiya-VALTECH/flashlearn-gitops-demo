@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: fl-nginx
+  labels:
+    app.kubernetes.io/name: fl-nginx
+    app.kubernetes.io/part-of: fl-app-of-apps
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: nginx.fl.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: fl-nginx
+                port:
+                  name: http

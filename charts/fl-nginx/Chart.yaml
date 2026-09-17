@@ -1,0 +1,6 @@
+apiVersion: v2
+name: fl-nginx
+description: Minimal nginx chart for the FlashLearn Argo CD demo
+type: application
+version: 0.1.0
+appVersion: "1.29.1"

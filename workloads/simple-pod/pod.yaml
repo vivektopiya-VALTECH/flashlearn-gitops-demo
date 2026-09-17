@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fl-nginx-pod
+  labels:
+    app.kubernetes.io/name: fl-nginx
+    app.kubernetes.io/part-of: flashlearn-gitops-demo
+spec:
+  containers:
+    - name: fl-nginx
+      image: nginx:1.29.1-alpine
+      ports:
+        - name: http
+          containerPort: 80
+      resources:
+        requests:
+          cpu: 25m
+          memory: 32Mi
+        limits:
+          cpu: 100m
+          memory: 64Mi

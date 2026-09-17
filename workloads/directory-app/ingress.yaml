@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: fl-directory-nginx
+  labels:
+    app.kubernetes.io/name: fl-nginx
+    app.kubernetes.io/instance: fl-directory-nginx
+    app.kubernetes.io/part-of: flashlearn-gitops-demo
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: directory.fl.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: fl-directory-nginx
+                port:
+                  name: http

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fl-echo
+  labels:
+    app.kubernetes.io/name: fl-echo
+    app.kubernetes.io/part-of: fl-app-of-apps
+spec:
+  selector:
+    app.kubernetes.io/name: fl-echo
+  ports:
+    - name: http
+      port: 80
+      targetPort: http

@@ -1,0 +1,51 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: fl-dev-nginx
+  namespace: argocd
+  labels:
+    app.kubernetes.io/part-of: fl-app-of-apps
+    fl-environment: dev
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/vivektopiya-VALTECH/flashlearn-gitops-demo.git
+    targetRevision: main
+    path: app-of-apps/overlays/dev/nginx
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: fl-dev
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: fl-dev-echo
+  namespace: argocd
+  labels:
+    app.kubernetes.io/part-of: fl-app-of-apps
+    fl-environment: dev
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/vivektopiya-VALTECH/flashlearn-gitops-demo.git
+    targetRevision: main
+    path: app-of-apps/overlays/dev/echo
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: fl-dev
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

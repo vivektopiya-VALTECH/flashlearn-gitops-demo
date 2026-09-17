@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: fl-echo
+  labels:
+    app.kubernetes.io/name: fl-echo
+    app.kubernetes.io/part-of: fl-app-of-apps
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: echo.fl.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: fl-echo
+                port:
+                  name: http

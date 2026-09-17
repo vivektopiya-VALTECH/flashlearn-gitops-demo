@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fl-nginx
+  labels:
+    app.kubernetes.io/name: fl-nginx
+    app.kubernetes.io/part-of: fl-app-of-apps
+spec:
+  selector:
+    app.kubernetes.io/name: fl-nginx
+  ports:
+    - name: http
+      port: 80
+      targetPort: http

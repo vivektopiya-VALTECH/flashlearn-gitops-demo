@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: fl-helm-nginx
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/vivektopiya-VALTECH/flashlearn-gitops-demo.git
+    targetRevision: main
+    path: charts/fl-nginx
+    helm:
+      releaseName: fl-helm-nginx
+      valueFiles:
+        - values-demo.yaml
+      valuesObject:
+        service:
+          port: 8080
+        ingress:
+          enabled: true
+          host: helm.fl.local
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

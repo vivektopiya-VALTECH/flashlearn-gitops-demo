@@ -1,0 +1,22 @@
+replicaCount: 1
+
+image:
+  repository: nginx
+  tag: 1.29.1-alpine
+  pullPolicy: IfNotPresent
+
+service:
+  port: 80
+
+ingress:
+  enabled: false
+  className: nginx
+  host: chart.fl.local
+
+resources:
+  requests:
+    cpu: 25m
+    memory: 32Mi
+  limits:
+    cpu: 100m
+    memory: 64Mi

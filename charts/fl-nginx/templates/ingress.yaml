@@ -1,0 +1,23 @@
+{{- if .Values.ingress.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: fl-helm-nginx
+  labels:
+    app.kubernetes.io/name: fl-nginx
+    app.kubernetes.io/instance: fl-helm-nginx
+    app.kubernetes.io/part-of: flashlearn-gitops-demo
+spec:
+  ingressClassName: {{ .Values.ingress.className }}
+  rules:
+    - host: {{ .Values.ingress.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: fl-helm-nginx
+                port:
+                  name: http
+{{- end }}

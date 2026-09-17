@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fl-directory-nginx
+  labels:
+    app.kubernetes.io/name: fl-nginx
+    app.kubernetes.io/instance: fl-directory-nginx
+    app.kubernetes.io/part-of: flashlearn-gitops-demo
+spec:
+  selector:
+    app.kubernetes.io/instance: fl-directory-nginx
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
